@@ -1,0 +1,7 @@
+**/.astro
+**/.circleci
+**/.git
+**/.github
+**/.husky
+**/public
+**/node_modules
