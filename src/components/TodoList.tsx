@@ -8,7 +8,11 @@ type ITodoItem = {
 }
 
 const TodoList = () => {
-  const [items, setItems] = createSignal<ITodoItem[]>([{ id: uuidv4(), text: 'Random item', done: false }])
+  const [items, setItems] = createSignal<ITodoItem[]>([
+    { id: uuidv4(), text: 'Random item 1', done: false },
+    { id: uuidv4(), text: 'Random item 2', done: false },
+    { id: uuidv4(), text: 'Done item 1', done: true },
+  ])
   const [newItem, setNewItem] = createSignal<string>('')
 
   const markAsDone = (id: string) => {
@@ -16,8 +20,9 @@ const TodoList = () => {
   }
   return (
     <div>
-      <ul>
-        <For each={items()}>
+      <h1>Done items:</h1>
+      <ul title="done-items-list">
+        <For each={items().filter((x) => x.done)}>
           {(x) => (
             <li style={{ 'list-style': 'none' }}>
               <input id={x.id} type="checkbox" checked={x.done} onClick={() => markAsDone(x.id)} />
@@ -29,8 +34,23 @@ const TodoList = () => {
         </For>
       </ul>
       <br />
+      <h1>Todo items:</h1>
+      <ul title="todo-items-list">
+        <For each={items().filter((x) => !x.done)}>
+          {(x) => (
+            <li style={{ 'list-style': 'none' }}>
+              <input id={x.id} type="checkbox" class="pointer" checked={x.done} onClick={() => markAsDone(x.id)} />
+              <label for={x.id} style={{ 'text-decoration': x.done ? 'line-through' : 'none' }}>
+                {x.text}
+              </label>
+            </li>
+          )}
+        </For>
+      </ul>
+      <br />
       <form>
         <input
+          placeholder="Enter your item!"
           value={newItem()}
           onChange={(e) => {
             setNewItem(e.target.value)
@@ -40,8 +60,10 @@ const TodoList = () => {
           type="submit"
           onClick={(e) => {
             e.preventDefault()
-            setItems([...items(), { id: uuidv4(), text: newItem(), done: false }])
-            setNewItem('')
+            if (newItem().trim().length > 0) {
+              setItems([...items(), { id: uuidv4(), text: newItem(), done: false }])
+              setNewItem('')
+            }
           }}
         >
           Add item

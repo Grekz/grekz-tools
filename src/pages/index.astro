@@ -1,8 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import TodoList from '../components/TodoList';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!DOCTYPE html>
@@ -11,27 +11,15 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+		<!-- <Header title={SITE_TITLE} /> -->
+		<h2>
+			<a href={"/page2"}>
+				Go to page 2!
+			</a>
+		</h2>
 		<main>
-			<h1>Hello grekzor!</h1>
-			<p>Here you can find the list of projects that I consider useful to use on my day-to-day or that will help me on the development of good thingos mostly softare related.</p>
+			<TodoList client:idle/>
 		</main>
 		<Footer />
 	</body>
 </html>
-
-
-<style>
-	main {
-    padding: 0;
-    margin: 0 auto;
-    width: 75%;
-    /* text-align: center; */
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-	}
-	iframe {
-		margin: 40px auto;
-	}
-</style>

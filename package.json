@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:deploy": "pnpm run build && pnpm run deploy",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "aws s3 sync ./dist s3://tools.grekz.com --delete --cache-control \"max-age=3153600\"",
@@ -16,12 +17,23 @@
     "@astrojs/rss": "^2.4.1",
     "@astrojs/sitemap": "^1.3.0",
     "@astrojs/solid-js": "^2.1.1",
+    "@astrojs/ts-plugin": "^1.0.10",
     "astro": "^2.4.1",
     "solid-js": "^1.4.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
+    "eslint-plugin-solid": "^0.12.1",
     "husky": "^8.0.0",
-    "pretty-quick": "^3.1.3"
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.10.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   }
 }
