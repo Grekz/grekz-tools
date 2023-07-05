@@ -8,7 +8,10 @@ type ITodoItem = {
 }
 
 const TodoList = () => {
-  const [items, setItems] = createSignal<ITodoItem[]>([{ id: uuidv4(), text: 'Random item', done: false }])
+  const [items, setItems] = createSignal<ITodoItem[]>([
+    { id: uuidv4(), text: 'Random item 1', done: false },
+    { id: uuidv4(), text: 'Random item 2', done: false },
+  ])
   const [newItem, setNewItem] = createSignal<string>('')
 
   const markAsDone = (id: string) => {
@@ -35,7 +38,7 @@ const TodoList = () => {
         <For each={items().filter((x) => !x.done)}>
           {(x) => (
             <li style={{ 'list-style': 'none' }}>
-              <input id={x.id} type="checkbox" checked={x.done} onClick={() => markAsDone(x.id)} />
+              <input id={x.id} type="checkbox" class="pointer" checked={x.done} onClick={() => markAsDone(x.id)} />
               <label for={x.id} style={{ 'text-decoration': x.done ? 'line-through' : 'none' }}>
                 {x.text}
               </label>
