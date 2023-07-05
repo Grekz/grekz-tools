@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:deploy": "pnpm run build && pnpm run deploy",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "aws s3 sync ./dist s3://tools.grekz.com --delete --cache-control \"max-age=3153600\"",

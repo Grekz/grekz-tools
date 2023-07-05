@@ -11,6 +11,7 @@ const TodoList = () => {
   const [items, setItems] = createSignal<ITodoItem[]>([
     { id: uuidv4(), text: 'Random item 1', done: false },
     { id: uuidv4(), text: 'Random item 2', done: false },
+    { id: uuidv4(), text: 'Done item 1', done: true },
   ])
   const [newItem, setNewItem] = createSignal<string>('')
 
